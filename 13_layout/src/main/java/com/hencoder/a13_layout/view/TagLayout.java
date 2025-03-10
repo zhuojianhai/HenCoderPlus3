@@ -20,8 +20,10 @@ public class TagLayout extends ViewGroup {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         int widthUsed = 0;
         int heightUsed = 0;
+
         int lineWidthUsed = 0;
         int lineHeight = 0;
+
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
         int widthSize = MeasureSpec.getSize(widthMeasureSpec);
         for (int i = 0; i < getChildCount(); i++) {

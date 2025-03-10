@@ -22,14 +22,15 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     List<Shop<Apple>> appleShopList = new ArrayList<Shop<Apple>>(){};
 
-type projection
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         Shop<?>[] objects = new Shop<?>[10];
+
         TypeToken<List<String>> listTypeToken = new TypeToken<List<String>>(){};
+
         List<? extends Fruit> fruits = new ArrayList<Apple>();
         List<? super Apple> apples = new ArrayList<Fruit>();
     }
@@ -40,5 +41,9 @@ type projection
             weight += fruit.getWeight();
         }
         return weight;
+    }
+
+    public  void showTypeToken(){
+        TypeToken<List<String>> listTypeToken = new TypeToken<List<String>>(){};
     }
 }

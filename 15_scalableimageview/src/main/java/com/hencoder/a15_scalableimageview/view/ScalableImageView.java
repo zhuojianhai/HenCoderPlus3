@@ -23,10 +23,10 @@ public class ScalableImageView extends View {
 
     Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
     Bitmap bitmap;
-    float originalOffsetX;
-    float originalOffsetY;
-    float offsetX;
-    float offsetY;
+    float originalOffsetX;//图像初始偏移X
+    float originalOffsetY;//图像初始偏移Y
+    float offsetX;//X轴内容偏移---手指移动距离
+    float offsetY;//Y轴内容偏移---手指移动距离
     float smallScale;
     float bigScale;
     boolean big;
@@ -79,8 +79,8 @@ public class ScalableImageView extends View {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
 
-        originalOffsetX = (getWidth() - bitmap.getWidth()) / 2f;
-        originalOffsetY = (getHeight() - bitmap.getHeight()) / 2f;
+        originalOffsetX = (getWidth() - bitmap.getWidth()) / 2f;//默认图片居中显示 X坐标点
+        originalOffsetY = (getHeight() - bitmap.getHeight()) / 2f;//默认图片居中显示 Y坐标点
 
         if ((float) bitmap.getWidth() / bitmap.getHeight() > (float) getWidth() / getHeight()) {
             smallScale = (float) getWidth() / bitmap.getWidth();
@@ -102,11 +102,12 @@ public class ScalableImageView extends View {
         canvas.drawBitmap(bitmap, originalOffsetX, originalOffsetY, paint);
     }
 
+    //修正边界值，不能超过边界值
     private void fixOffsets() {
-        offsetX = Math.min(offsetX, (bitmap.getWidth() * bigScale - getWidth()) / 2);
-        offsetX = Math.max(offsetX, - (bitmap.getWidth() * bigScale - getWidth()) / 2);
-        offsetY = Math.min(offsetY, (bitmap.getHeight() * bigScale - getHeight()) / 2);
-        offsetY = Math.max(offsetY, - (bitmap.getHeight() * bigScale - getHeight()) / 2);
+        offsetX = Math.min(offsetX, (bitmap.getWidth() * bigScale - getWidth()) / 2);//右边界，最大不能超过参数2这个值,所以使用使用min函数取最小值（真正边界值）
+        offsetX = Math.max(offsetX, - (bitmap.getWidth() * bigScale - getWidth()) / 2);//左边界，最小不能超过参数2这个值,所以使用使用max函数取最大值（真正边界值）
+        offsetY = Math.min(offsetY, (bitmap.getHeight() * bigScale - getHeight()) / 2);//下边界，最大值不能超过参数2的值
+        offsetY = Math.max(offsetY, - (bitmap.getHeight() * bigScale - getHeight()) / 2);//上边界，最小不能超过参数2这个值
     }
 
     private class HenGestureListener implements GestureDetector.OnGestureListener, GestureDetector.OnDoubleTapListener {
@@ -122,15 +123,25 @@ public class ScalableImageView extends View {
         }
 
         @Override
-        public boolean onSingleTapUp(MotionEvent e) {
+        public boolean onSingleTapUp(MotionEvent e) {//onSingleTapUp 只会在双击的的第一次回调。
             return false;
         }
 
+        //实际上是手指 触发 的onMove事件就会触发 onScroll 事件
+
+        /**
+         *滚动事件，当在触摸屏上迅速的移动，会产生onScroll。由ACTION_MOVE产生
+         * @param downEvent    第1个ACTION_DOWN MotionEvent
+         * @param currentEvent  最后一个ACTION_MOVE MotionEvent
+         * @param distanceX     距离上次产生onScroll事件后，X抽移动的距离
+         * @param distanceY     距离上次产生onScroll事件后，Y抽移动的距离
+         * @return
+         */
         @Override
-        public boolean onScroll(MotionEvent downEvent, MotionEvent event, float distanceX, float distanceY) {
-            if (big) {
-                offsetX -= distanceX;
-                offsetY -= distanceY;
+        public boolean onScroll(MotionEvent downEvent, MotionEvent currentEvent, float distanceX, float distanceY) {
+            if (big) {//滑动没有用到动画，所以这里需要主动invalidate刷新
+                offsetX -= distanceX;//是为了让 手指滑动方向与图片偏移方向相反，符合直觉的拖动效果。
+                offsetY -= distanceY;//是为了让 手指滑动方向与图片偏移方向相反，符合直觉的拖动效果。
                 fixOffsets();
                 invalidate();
             }
@@ -145,11 +156,12 @@ public class ScalableImageView extends View {
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
             if (big) {
+                //圆点定义在 整个view的中心，图片的中心就是模拟运动点中心
                 scroller.fling((int) offsetX, (int) offsetY, (int) velocityX, (int) velocityY,
-                        - (int) ((bitmap.getWidth() * bigScale - getWidth()) / 2),
-                        (int) ((bitmap.getWidth() * bigScale - getWidth()) / 2),
-                        - (int) ((bitmap.getHeight() * bigScale - getHeight()) / 2),
-                        (int) ((bitmap.getHeight() * bigScale - getHeight()) / 2));
+                        - (int) ((bitmap.getWidth() * bigScale - getWidth()) / 2), //x最左边位置   也就是边界值
+                        (int) ((bitmap.getWidth() * bigScale - getWidth()) / 2),//x 最右边位置       也就是边界值
+                        - (int) ((bitmap.getHeight() * bigScale - getHeight()) / 2),//y 最上边位置   也就是边界值
+                        (int) ((bitmap.getHeight() * bigScale - getHeight()) / 2));//y 最下边位置     也就是边界值
 
                 postOnAnimation(henFlingRunner);
             }
@@ -157,7 +169,7 @@ public class ScalableImageView extends View {
         }
 
         @Override
-        public boolean onSingleTapConfirmed(MotionEvent e) {
+        public boolean onSingleTapConfirmed(MotionEvent e) {//onSingleTapConfirmed 在发生双击时，会回调两次
             return false;
         }
 
@@ -184,6 +196,8 @@ public class ScalableImageView extends View {
     private class HenFlingRunner implements Runnable {
         @Override
         public void run() {
+            //scroller 只是一个计算器，当调用这个方法computeScrollOffset，就相当于掐表，
+            //然后通过 scroller.getCurrX()拿到掐表后的位置，然后更新 offsetX，然后再通过invalidate更新显示view
             if (scroller.computeScrollOffset()) {
                 offsetX = scroller.getCurrX();
                 offsetY = scroller.getCurrY();

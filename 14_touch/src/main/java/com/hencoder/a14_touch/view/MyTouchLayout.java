@@ -6,14 +6,19 @@ import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 
-public class TouchLayout extends ViewGroup {
+/**
+ * 如果自定义的viewGroup不是滑动控件，就需要重写shoulDelayChildPressedState方法，返回false
+ */
+public class MyTouchLayout extends ViewGroup {
     float downY;
 
-    public TouchLayout(Context context, AttributeSet attrs) {
+    public MyTouchLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
     //是否在滑动控件中，如果不是就返回false
+
+
     @Override
     public boolean shouldDelayChildPressedState() {
         return false;

@@ -8,11 +8,11 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.hencoder.a10_text_and_transformation.Utils;
-
 import androidx.annotation.Nullable;
 
-public class CameraView extends View {
+import com.hencoder.a10_text_and_transformation.Utils;
+
+public class CameraViewCustome extends View {
     private static final int IMAGE_WIDTH = (int) Utils.dp2px(200);
     private static final int IMAGE_PADDING = (int) Utils.dp2px(100);
 
@@ -20,7 +20,7 @@ public class CameraView extends View {
     Bitmap image;
     Camera camera = new Camera();
 
-    public CameraView(Context context, @Nullable AttributeSet attrs) {
+    public CameraViewCustome(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
@@ -49,8 +49,7 @@ public class CameraView extends View {
         canvas.rotate(-30);
         camera.applyToCanvas(canvas);
         canvas.clipRect(- IMAGE_WIDTH, 0, IMAGE_WIDTH, IMAGE_WIDTH);
-//        canvas.clipRect(- IMAGE_WIDTH/2, 0, IMAGE_WIDTH/2, IMAGE_WIDTH/2);  原先范围裁切有点小了，最终图形展示会有问题
-        canvas.rotate(30);//斜着切，实际上是将canvas旋转
+        canvas.rotate(30);
         canvas.translate(- (IMAGE_PADDING + IMAGE_WIDTH / 2), - (IMAGE_PADDING + IMAGE_WIDTH / 2));
         canvas.drawBitmap(image, IMAGE_PADDING, IMAGE_PADDING, paint);
         canvas.restore();

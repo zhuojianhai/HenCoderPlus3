@@ -25,12 +25,13 @@ public class HotfixApplication extends Application {
                 Field pathListField = loaderClass.getDeclaredField("pathList");
                 pathListField.setAccessible(true);
                 Object pathListObject = pathListField.get(classLoader); // getClassLoader().pathList
+//                DexPathList  这个类是 hide的，因此获取类名也只能通过反射
                 Class pathListClass = pathListObject.getClass();
                 Field dexElementsField = pathListClass.getDeclaredField("dexElements");
                 dexElementsField.setAccessible(true);
                 Object dexElementsObject = dexElementsField.get(pathListObject); // getClassLoader().pathList.dexElements
 
-                // classLoader.pathList.dexElements = ???;
+                // classLoader.pathList.dexElements = ???;  新的补丁包，将修复的dex放在 最前面
                 PathClassLoader newClassLoader = new PathClassLoader(apk.getPath(), null);
                 Object newPathListObject = pathListField.get(newClassLoader); // newClassLoader.pathList
                 Object newDexElementsObject = dexElementsField.get(newPathListObject); // newClassLoader.pathList.dexElements
