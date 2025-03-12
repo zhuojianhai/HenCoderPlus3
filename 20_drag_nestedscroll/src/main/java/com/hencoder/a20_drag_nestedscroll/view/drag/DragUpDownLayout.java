@@ -58,7 +58,7 @@ public class DragUpDownLayout extends FrameLayout {
         }
 
         @Override
-        public int clampViewPositionVertical(@NonNull View child, int top, int dy) {
+        public int clampViewPositionVertical(@NonNull View child, int top, int dy) {// 值钳住纵向，也就只有纵向可以滑动
             return top;
         }
 

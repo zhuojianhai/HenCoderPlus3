@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
@@ -85,17 +86,30 @@ public class ScalableImageView extends View {
         if ((float) bitmap.getWidth() / bitmap.getHeight() > (float) getWidth() / getHeight()) {
             smallScale = (float) getWidth() / bitmap.getWidth();
             bigScale = (float) getHeight() / bitmap.getHeight() * OVER_SCALE_FACTOR;
+            Log.e("ScalableImageView","smallScale = true ");
+            Log.e("ScalableImageView","smallScale >>>> "+smallScale);
+            Log.e("ScalableImageView","bigScale >>>> "+bigScale);
+            Log.e("ScalableImageView","bitmap.getWidth() >>>> "+bitmap.getWidth());
+            Log.e("ScalableImageView","bitmap.getHeight() >>>> "+bitmap.getHeight());
+            Log.e("ScalableImageView","View.getWidth() >>>> "+getWidth());
+            Log.e("ScalableImageView","View.getHeight() >>>> "+getHeight());
         } else {
+            Log.e("ScalableImageView","smallScale = false ");
+            Log.e("ScalableImageView","smallScale >>>> "+smallScale);
+            Log.e("ScalableImageView","bigScale >>>> "+bigScale);
             smallScale = (float) getHeight() / bitmap.getHeight();
             bigScale = (float) getWidth() / bitmap.getWidth() * OVER_SCALE_FACTOR;
         }
         currentScale = smallScale;
+
+
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-
+        Log.e("ScalableImageView","smallScale >>>> "+smallScale);
+        Log.e("ScalableImageView","bigScale >>>> "+bigScale);
         float scaleFraction = (currentScale - smallScale) / (bigScale - smallScale);
         canvas.translate(offsetX * scaleFraction, offsetY * scaleFraction);
         canvas.scale(currentScale, currentScale, getWidth() / 2f, getHeight() / 2f);
@@ -177,8 +191,11 @@ public class ScalableImageView extends View {
         public boolean onDoubleTap(MotionEvent e) {
             big = !big;
             if (big) {
-                offsetX = (e.getX() - getWidth() / 2f) * (1 - bigScale / smallScale);
-                offsetY = (e.getY() - getHeight() / 2f) * (1 - bigScale / smallScale);
+                //双击放大点，不偏移   （bigScale / smallScale 是图片放大倍数）
+                offsetX = (e.getX() - getWidth() / 2f) - (e.getX() - getWidth() / 2f)* bigScale / smallScale;
+                offsetY = (e.getY() - getHeight() / 2f) - (e.getY() - getHeight() / 2f)* bigScale / smallScale;
+//                offsetX = (e.getX() - getWidth() / 2f) * (1 - bigScale / smallScale);
+//                offsetY = (e.getY() - getHeight() / 2f) * (1 - bigScale / smallScale);
                 fixOffsets();
                 getScaleAnimator().start();
             } else {

@@ -11,10 +11,22 @@
         android:orientation="vertical">
 
         <View
+            android:id="@+id/drag_to_collect"
             android:layout_width="match_parent"
             android:layout_height="400dp"
             android:background="@color/colorAccent" />
 
+        <View
+            android:id="@+id/drag_helper"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:background="@color/colorPrimary" />
+
+        <View
+            android:id="@+id/drag_up_down"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:background="@color/colorAccent" />
         <com.hencoder.a20_drag_nestedscroll.view.nested_scroll.NestedScalableImageView
             android:layout_width="match_parent"
             android:layout_height="400dp" />

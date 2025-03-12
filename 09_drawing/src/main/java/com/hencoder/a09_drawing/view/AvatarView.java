@@ -62,8 +62,9 @@ public class AvatarView extends View {
         options.inJustDecodeBounds = true;
         BitmapFactory.decodeResource(getResources(), R.drawable.avatar_rengwuxian, options);
         options.inJustDecodeBounds = false;
-        options.inDensity = options.outWidth;
-        options.inTargetDensity = width;
+        options.inDensity = options.outWidth;  //得到图片的原始密度(原始宽度)
+        options.inTargetDensity = width;//得到想要的密度（想要的宽度）
+        //正式加载图片，并根据密度缩放
         return BitmapFactory.decodeResource(getResources(), R.drawable.avatar_rengwuxian, options);
     }
 }

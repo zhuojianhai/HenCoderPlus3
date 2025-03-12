@@ -172,7 +172,7 @@ public class ScableImageViewDemo extends View {
 //       float currentScale =  big?bigScale:smallScale;
 //        canvas.scale(currentScale,currentScale,getWidth()/2f,getHeight()/2f);
 
-        float scale = smallScale + (bigScale-smallScale)*scaleFraction;
+        float scale = smallScale + (bigScale-smallScale);
         canvas.translate(offsetX,offsetY);
         canvas.scale(scale,scale,getWidth()/2f,getHeight()/2f);
         canvas.drawBitmap(bitmap,originalOffsetX,originalOffsetY,paint);

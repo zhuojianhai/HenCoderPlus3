@@ -16,6 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".DragLinstenerActivity"></activity>
+        <activity android:name=".DragHelperActivity"></activity>
+        <activity android:name=".DragUpAndDownActivity"></activity>
     </application>
 
 </manifest>
