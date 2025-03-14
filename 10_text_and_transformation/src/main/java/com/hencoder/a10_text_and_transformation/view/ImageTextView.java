@@ -43,7 +43,7 @@ public class ImageTextView extends View {
         canvas.drawBitmap(image, getWidth() - IMAGE_WIDTH, IMAGE_PADDING, paint);
 
         int length = text.length();
-        float yOffset = paint.getFontSpacing();
+        float yOffset = paint.getFontSpacing();//获得推荐标准行间距
         int usableWidth;
         for (int start = 0, count; start < length; start += count, yOffset += paint.getFontSpacing()) {
             float textTop = yOffset + metrics.ascent;
