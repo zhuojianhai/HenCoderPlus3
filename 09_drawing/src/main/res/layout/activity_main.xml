@@ -1,18 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-    <com.hencoder.a09_drawing.view.AvatarView
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-    <TextView
-        android:id="@+id/tv_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    </TextView>
+        <com.hencoder.a09_drawing.view.AvatarView
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
-</LinearLayout>
+        <com.hencoder.a09_drawing.view.PieChart
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </com.hencoder.a09_drawing.view.PieChart>
+
+        <com.hencoder.a09_drawing.view.MyCircleView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </com.hencoder.a09_drawing.view.MyCircleView>
+
+        <com.hencoder.a09_drawing.view.MyView
+            style="@style/Widget.AppTheme.MyView"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:paddingLeft="20dp"
+            android:paddingBottom="40dp"
+            app:exampleDimension="24sp"
+            app:exampleDrawable="@android:drawable/ic_menu_add"
+            app:exampleColor="@color/colorAccent"
+            app:exampleString="Hello, MyView" />
+        <com.hencoder.a09_drawing.view.MyPieChatView
+            app:defalutRadius="100dp"
+            app:defaultPulledLength="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.hencoder.a09_drawing.view.MyPieChatView>
+    </LinearLayout>
+
+</ScrollView>

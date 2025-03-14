@@ -1,8 +1,13 @@
 <resources>
-    <declare-styleable name="MyCircleView">
+    <declare-styleable name="MyView">
         <attr name="exampleString" format="string" />
         <attr name="exampleDimension" format="dimension" />
         <attr name="exampleColor" format="color" />
         <attr name="exampleDrawable" format="color|reference" />
+    </declare-styleable>
+
+    <declare-styleable name="MyPieChatView">
+        <attr name="defalutRadius" format="dimension"></attr>
+        <attr name="defaultPulledLength" format="dimension"></attr>
     </declare-styleable>
 </resources>

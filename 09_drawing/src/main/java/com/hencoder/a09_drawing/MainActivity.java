@@ -19,35 +19,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ViewParent parent = getWindow().getDecorView().getParent();
-        Log.e(TAG, "onCreate: "+parent.toString() );
-        TextView tv = findViewById(R.id.tv_title);
-        boolean attachedToWindow = tv.isAttachedToWindow();
-        tv.post(new Runnable() {
-            @Override
-            public void run() {
-
-            }
-        });
-
-        final LinearLayout linearLayout =null;
-        ViewTreeObserver.OnGlobalLayoutListener onGlobalLayoutListener = new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                int width = linearLayout.getWidth();
-            }
-        };
 
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                Looper.prepare();
-                Button button = new Button(MainActivity.this);
-                getWindow().getWindowManager().addView(button,null);
-                Looper.loop();
-
-            }
-        }).start();
     }
 }
