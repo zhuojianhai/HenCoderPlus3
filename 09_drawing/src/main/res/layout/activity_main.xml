@@ -13,14 +13,33 @@
         android:orientation="vertical">
 
         <com.hencoder.a09_drawing.view.AvatarView
-            android:visibility="gone"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="400dp" />
+        <com.hencoder.a09_drawing.view.TrasferModeView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </com.hencoder.a09_drawing.view.TrasferModeView>
+
+        <com.hencoder.a09_drawing.view.XformodeView
+            android:layout_width="match_parent"
+            android:layout_height="300dp">
+
+        </com.hencoder.a09_drawing.view.XformodeView>
+        <com.hencoder.a09_drawing.view.XformodeViewAdjust
+            android:layout_width="match_parent"
+            android:layout_height="300dp">
+
+        </com.hencoder.a09_drawing.view.XformodeViewAdjust>
 
         <com.hencoder.a09_drawing.view.PieChart
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </com.hencoder.a09_drawing.view.PieChart>
+        <com.hencoder.a09_drawing.view.DashBoard
+            android:layout_width="match_parent"
+            android:layout_height="800dp">
+        </com.hencoder.a09_drawing.view.DashBoard>
 
         <com.hencoder.a09_drawing.view.MyCircleView
             android:layout_width="match_parent"

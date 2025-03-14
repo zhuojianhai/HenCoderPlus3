@@ -17,6 +17,10 @@ import com.hencoder.a09_drawing.Utils;
 
 import androidx.annotation.Nullable;
 
+/**
+ * 因为没有测量自定义view的尺寸大小，所以在Layout布局文件中，必须指定 这个view的 高度或者宽度才能显示
+ * Transfermode 学习
+ */
 public class AvatarView extends View {
     private static final float WIDTH = Utils.dp2px(300);
     private static final float PADDING = Utils.dp2px(40);
