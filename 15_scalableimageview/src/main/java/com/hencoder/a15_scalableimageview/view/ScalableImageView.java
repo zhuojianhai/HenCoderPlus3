@@ -165,6 +165,8 @@ public class ScalableImageView extends View {
         public boolean onDoubleTap(MotionEvent e) {
             big = !big;
             if (big) {
+                offsetX = (e.getX()-getWidth()/2f) -(e.getX()-getWidth()/2f)*bigScale/smallScale;
+                //解决点击放大，原地放缩。放大的点还在原地
                 offsetX = (e.getX() - getWidth() / 2f) * (1 - bigScale / smallScale);
                 offsetY = (e.getY() - getHeight() / 2f) * (1 - bigScale / smallScale);
                 fixOffsets();

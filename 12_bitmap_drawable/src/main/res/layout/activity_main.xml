@@ -32,4 +32,11 @@
 
     </FrameLayout>
 
+    <com.hencoder.a12_bitmap_drawable.view.DrawableViewCustom
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+
+    </com.hencoder.a12_bitmap_drawable.view.DrawableViewCustom>
+
+
 </LinearLayout>

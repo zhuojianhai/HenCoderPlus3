@@ -2,29 +2,40 @@ package com.hencoder.a11_animation;
 
 import android.animation.ObjectAnimator;
 import android.animation.TypeEvaluator;
+import android.content.Intent;
 import android.graphics.PointF;
 import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.hencoder.a11_animation.view.ProvinceView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
-    ProvinceView view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        view = findViewById(R.id.view);
+     ImageView view = findViewById(R.id.view);
 
-        /*view.animate()
+        view.animate()
                 .translationX(Utils.dpToPixel(200))
-//                .translationY(Utils.dpToPixel(100))
-//                .rotation(90)
-                .setStartDelay(1000)
-                .start();*/
+                .translationY(Utils.dpToPixel(100))
+                .rotation(90)
+                .alpha(0.8f)
+                .setStartDelay(5000)
+                .start();
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ObjectAnimationActivity.class);
+                startActivity(intent);
+            }
+        });
 
         /*ObjectAnimator animator = ObjectAnimator.ofFloat(view, "radius", Utils.dpToPixel(150));
         animator.setStartDelay(1000);
@@ -74,10 +85,10 @@ public class MainActivity extends AppCompatActivity {
         animator.setDuration(1000);
         animator.start();*/
 
-        ObjectAnimator animator = ObjectAnimator.ofObject(view, "province", new ProvinceUtil.ProvinceEvaluator(), "澳门特别行政区");
-        animator.setStartDelay(1000);
-        animator.setDuration(10000);
-        animator.start();
+//        ObjectAnimator animator = ObjectAnimator.ofObject(view, "province", new ProvinceUtil.ProvinceEvaluator(), "澳门特别行政区");
+//        animator.setStartDelay(1000);
+//        animator.setDuration(10000);
+//        animator.start();
     }
 
     static class PointFEvaluator implements TypeEvaluator<PointF> {
@@ -87,5 +98,16 @@ public class MainActivity extends AppCompatActivity {
             float y = startValue.y + (endValue.y - startValue.y) * fraction;
             return new PointF(x, y);
         }
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        int action = event.getAction();
+        if (action==MotionEvent.ACTION_UP){
+            Intent intent = new Intent(this, ObjectAnimationActivity.class);
+            startActivity(intent);
+        }
+        return true;
+
     }
 }
