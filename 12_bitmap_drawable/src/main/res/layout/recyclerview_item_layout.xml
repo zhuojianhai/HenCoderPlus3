@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorAccent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <ImageView
         app:layout_constraintLeft_toLeftOf="parent"
@@ -10,7 +11,17 @@
         android:id="@+id/imageItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-
     </ImageView>
+    <TextView
+        app:layout_constraintLeft_toRightOf="@+id/imageItem"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageItem"
+        app:layout_constraintBottom_toBottomOf="@+id/imageItem"
+        android:text="看到过麓山国际"
+        android:id="@+id/tv"
+        android:layout_width="0dp"
+        android:layout_height="0dp">
+
+    </TextView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
