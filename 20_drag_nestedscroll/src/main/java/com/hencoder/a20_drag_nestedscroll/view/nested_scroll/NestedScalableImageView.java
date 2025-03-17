@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.core.view.GestureDetectorCompat;
 import androidx.core.view.NestedScrollingChild2;
 import androidx.core.view.NestedScrollingChildHelper;
+import androidx.core.view.NestedScrollingParent;
 import androidx.core.view.ViewCompat;
 
 import com.hencoder.a20_drag_nestedscroll.Utils;
@@ -26,6 +27,7 @@ public class NestedScalableImageView extends View implements NestedScrollingChil
 
     Bitmap bitmap;
     Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+    NestedScrollingParent d;
 
     float offsetX;
     float offsetY;

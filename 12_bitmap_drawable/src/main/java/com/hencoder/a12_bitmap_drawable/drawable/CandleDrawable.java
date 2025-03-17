@@ -2,6 +2,7 @@ package com.hencoder.a12_bitmap_drawable.drawable;
 
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
+import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
@@ -25,6 +26,6 @@ public class CandleDrawable extends Drawable {
 
     @Override
     public int getOpacity() {
-        return 0;
+        return PixelFormat.UNKNOWN;
     }
 }

@@ -34,14 +34,14 @@ public class CameraView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        canvas.save();
-        canvas.translate(IMAGE_PADDING + IMAGE_WIDTH / 2, IMAGE_PADDING + IMAGE_WIDTH / 2);
-        canvas.rotate(-30);
-        canvas.clipRect(- IMAGE_WIDTH, - IMAGE_WIDTH, IMAGE_WIDTH, 0);
-        canvas.rotate(30);
-        canvas.translate(- (IMAGE_PADDING + IMAGE_WIDTH / 2), - (IMAGE_PADDING + IMAGE_WIDTH / 2));
-        canvas.drawBitmap(image, IMAGE_PADDING, IMAGE_PADDING, paint);
-        canvas.restore();
+//        canvas.save();
+//        canvas.translate(IMAGE_PADDING + IMAGE_WIDTH / 2, IMAGE_PADDING + IMAGE_WIDTH / 2);
+//        canvas.rotate(-30);
+//        canvas.clipRect(- IMAGE_WIDTH, - IMAGE_WIDTH, IMAGE_WIDTH, 0);
+//        canvas.rotate(30);
+//        canvas.translate(- (IMAGE_PADDING + IMAGE_WIDTH / 2), - (IMAGE_PADDING + IMAGE_WIDTH / 2));
+//        canvas.drawBitmap(image, IMAGE_PADDING, IMAGE_PADDING, paint);
+//        canvas.restore();
 
 
         canvas.save();
@@ -50,6 +50,7 @@ public class CameraView extends View {
         camera.applyToCanvas(canvas);
         canvas.clipRect(- IMAGE_WIDTH, 0, IMAGE_WIDTH, IMAGE_WIDTH);
         canvas.rotate(30);
+//        canvas.clipRect(- IMAGE_WIDTH/2, 0, IMAGE_WIDTH/2, IMAGE_WIDTH/2);
         canvas.translate(- (IMAGE_PADDING + IMAGE_WIDTH / 2), - (IMAGE_PADDING + IMAGE_WIDTH / 2));
         canvas.drawBitmap(image, IMAGE_PADDING, IMAGE_PADDING, paint);
         canvas.restore();

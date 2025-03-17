@@ -103,7 +103,7 @@ public class TwoPager extends ViewGroup {
                 break;
             case MotionEvent.ACTION_UP:
                 velocityTracker.computeCurrentVelocity(1000, maxVelocity);
-                float vx = velocityTracker.getXVelocity();
+                float vx = velocityTracker.getXVelocity();//vx 如果是小于0 说明是往左
                 int scrollX = getScrollX();
                 int targetPage;
                 if (Math.abs(vx) < minVelocity) {

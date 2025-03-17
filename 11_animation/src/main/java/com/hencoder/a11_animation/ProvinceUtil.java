@@ -6,7 +6,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ProvinceUtil {
-    public static List<String> provinces = Arrays.asList("北京市",
+    public static List<String> provinces = Arrays.asList(
+            "北京市",
             "天津市",
             "上海市",
             "重庆市",

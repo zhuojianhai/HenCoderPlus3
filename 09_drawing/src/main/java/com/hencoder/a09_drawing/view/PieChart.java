@@ -21,8 +21,8 @@ public class PieChart extends View {
             Color.parseColor("#D81B60"),
             Color.parseColor("#43A047"),
             Color.parseColor("#FDD835")};
-    int[] ANGLES = {60, 100, 120, 80};
-    private static final int PULLED_INDEX = 1;
+    int[] ANGLES = {50, 110, 120, 80};
+    private static final int PULLED_INDEX = 0;
 
     public PieChart(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -47,10 +47,10 @@ public class PieChart extends View {
                 canvas.save();
                 canvas.translate((float) Math.cos(Math.toRadians(currentAngle + ANGLES[i] / 2)) * PULLED_LENGTH,
                         (float) Math.sin(Math.toRadians(currentAngle + ANGLES[i] / 2)) * PULLED_LENGTH);
-            }
-            canvas.drawArc(bounds, currentAngle, ANGLES[i], true, paint);
-            if (i == PULLED_INDEX) {
+                canvas.drawArc(bounds, currentAngle, ANGLES[i], true, paint);
                 canvas.restore();
+            }else{
+                canvas.drawArc(bounds, currentAngle, ANGLES[i], true, paint);
             }
             currentAngle += ANGLES[i];
         }
