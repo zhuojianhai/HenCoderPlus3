@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.hencoder.a11_animation.view.CameraView
+        android:id="@+id/cameraView"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </com.hencoder.a11_animation.view.CameraView>
+
+    <com.hencoder.a11_animation.view.ProvinceView
+        app:layout_constraintBottom_toTopOf="@+id/cameraView"
+        app:layout_constraintTop_toBottomOf="@+id/cameraView"
+        android:id="@+id/province"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </com.hencoder.a11_animation.view.ProvinceView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

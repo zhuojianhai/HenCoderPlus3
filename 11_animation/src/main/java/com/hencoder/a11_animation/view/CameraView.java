@@ -1,26 +1,32 @@
 package com.hencoder.a11_animation.view;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Camera;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.hencoder.a11_animation.Utils;
-
 import androidx.annotation.Nullable;
 
-public class FancyView extends View {
+import com.hencoder.a11_animation.Utils;
+
+/**
+ * 用于翻页属性动画的 cameraview
+ */
+public class CameraView extends View {
+    private static final int IMAGE_WIDTH = (int) Utils.dpToPixel(200);
+    private static final int IMAGE_PADDING = (int) Utils.dpToPixel(100);
+
     Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    int IMAGEWIDTH = 600;
-
-
+    Bitmap image;
     Camera camera = new Camera();
 
     float topFlip = 0;
     float bottomFlip = 0;
     float flipRotation = 0;
+
 
     public float getTopFlip() {
         return topFlip;
@@ -49,44 +55,49 @@ public class FancyView extends View {
         invalidate();
     }
 
-    public FancyView(Context context, @Nullable AttributeSet attrs) {
+    public CameraView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
     {
-        camera.setLocation(0, 0, Utils.getZForCamera()); // -8 = -8 * 72
+        image = Utils.getAvatar(getResources(), IMAGE_WIDTH);
+        camera.setLocation(0 , 0, Utils.getZForCamera()); // -8 * 72
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        // 绘制上半部分
         canvas.save();
-        canvas.translate(100 + 600 / 2, 100 + 600 / 2);
+        canvas.translate(IMAGE_PADDING + IMAGE_WIDTH / 2, IMAGE_PADDING + IMAGE_WIDTH / 2);
         canvas.rotate(-flipRotation);
+        //上部分图片也旋转
         camera.save();
         camera.rotateX(topFlip);
         camera.applyToCanvas(canvas);
         camera.restore();
-        canvas.clipRect(- 600, - 600, 600, 0);
+
+        canvas.clipRect(- IMAGE_WIDTH, - IMAGE_WIDTH, IMAGE_WIDTH, 0);
         canvas.rotate(flipRotation);
-        canvas.translate(- (100 + 600 / 2), - (100 + 600 / 2));
-        canvas.drawBitmap(Utils.getAvatar(getResources(), 600), 100, 100, paint);
+        canvas.translate(- (IMAGE_PADDING + IMAGE_WIDTH / 2), - (IMAGE_PADDING + IMAGE_WIDTH / 2));
+        canvas.drawBitmap(image, IMAGE_PADDING, IMAGE_PADDING, paint);
         canvas.restore();
 
-        // 绘制下半部分
+
         canvas.save();
-        canvas.translate(100 + 600 / 2, 100 + 600 / 2);
+        canvas.translate(IMAGE_PADDING + IMAGE_WIDTH / 2, IMAGE_PADDING + IMAGE_WIDTH / 2);
         canvas.rotate(-flipRotation);
+
+        //下部分图片也旋转
         camera.save();
         camera.rotateX(bottomFlip);
         camera.applyToCanvas(canvas);
         camera.restore();
-        canvas.clipRect(- 600, 0, 600, 600);
+
+        canvas.clipRect(- IMAGE_WIDTH, 0, IMAGE_WIDTH, IMAGE_WIDTH);
         canvas.rotate(flipRotation);
-        canvas.translate(- (100 + 600 / 2), - (100 + 600 / 2));
-        canvas.drawBitmap(Utils.getAvatar(getResources(), 600), 100, 100, paint);
+        canvas.translate(- (IMAGE_PADDING + IMAGE_WIDTH / 2), - (IMAGE_PADDING + IMAGE_WIDTH / 2));
+        canvas.drawBitmap(image, IMAGE_PADDING, IMAGE_PADDING, paint);
         canvas.restore();
     }
 }

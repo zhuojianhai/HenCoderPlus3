@@ -94,10 +94,10 @@ public class PieChart extends View {
                 canvas.save();
                 canvas.translate((float) Math.cos(Math.toRadians(currentAngle + ANGLES[i] / 2)) * PULLED_LENGTH,
                         (float) Math.sin(Math.toRadians(currentAngle + ANGLES[i] / 2)) * PULLED_LENGTH);
-            }
-            canvas.drawArc(bounds, currentAngle, ANGLES[i], true, paint);
-            if (i == PULLED_INDEX) {
+                canvas.drawArc(bounds, currentAngle, ANGLES[i], true, paint);
                 canvas.restore();
+            }else{
+                canvas.drawArc(bounds, currentAngle, ANGLES[i], true, paint);
             }
             currentAngle += ANGLES[i];
         }

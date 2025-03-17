@@ -1,34 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <!--<ImageView
+    <ImageView
         android:id="@+id/view"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/avatar_rengwuxian" />-->
+        android:src="@drawable/avatar_rengwuxian" />
 
-    <!--<com.hencoder.a11_animation.view.CircleView
-        android:id="@+id/view"
+    <com.hencoder.a11_animation.view.CircleView
+        android:id="@+id/view2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />-->
+        android:layout_height="300dp" />
 
-    <!--<com.hencoder.a11_animation.view.CameraView
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />-->
 
-    <!--<com.hencoder.a11_animation.view.PointView
-        android:id="@+id/view"
+    <com.hencoder.a11_animation.view.PointView
+        android:id="@+id/view3"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />-->
+        android:layout_height="300dp" />
 
     <com.hencoder.a11_animation.view.ProvinceView
-        android:id="@+id/view"
+        android:id="@+id/view4"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="300dp" />
 
 </LinearLayout>
+</ScrollView>
