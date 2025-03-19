@@ -20,9 +20,9 @@ public class Main {
 //        threadFactory();
 //        executor();
 //        callable();
-//        runSynchronized1Demo();
+        runSynchronized1Demo();
 //        runSynchronized2Demo();
-        runSynchronized3Demo();
+//        runSynchronized3Demo();
 //        runReadWriteLockDemo();
     }
 
@@ -90,6 +90,13 @@ public class Main {
         executor.execute(runnable);
         executor.execute(runnable);
         executor.execute(runnable);
+
+
+    }
+
+    static void customThreadPoolExcutor(){
+        BlockingDeque<Runnable> queue = new LinkedBlockingDeque<>();
+        Executor threadPool =    new ThreadPoolExecutor(5,100,5,TimeUnit.SECONDS,queue);
     }
 
     static void callable() {
@@ -108,7 +115,7 @@ public class Main {
         ExecutorService executor = Executors.newCachedThreadPool();
         Future<String> future = executor.submit(callable);
         try {
-            String result = future.get();
+            String result = future.get();//get方法是阻塞的，
             System.out.println("result: " + result);
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
